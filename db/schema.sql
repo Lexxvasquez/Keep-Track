@@ -25,3 +25,24 @@ CREATE TABLE employee(
   FOREIGN KEY (role_id) REFERENCES role (id),
   FOREIGN KEY (manager_id) REFERENCES employee (id)
 );
+
+CREATE TABLE title(
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  description TEXT NOT NULL UNIQUE
+  );
+
+  CREATE TABLE salary(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    amount DECIMAL (9,2),
+    start_date DATE,
+    end_date DATE,
+    emp_id INT,
+    FOREIGN KEY (emp_id) REFERENCES employee (id)
+  );
+
+  CREATE TABLE department_id(
+    dept_id int primary key auto_increment not null,
+    dept_title varchar(45) default 'NULL',
+    constraint fk_dept,
+    foreign key (dept_id) references department(id) on delete cascade
+  );
