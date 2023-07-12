@@ -46,3 +46,25 @@ CREATE TABLE title(
     constraint fk_dept,
     foreign key (dept_id) references department(id) on delete cascade
   );
+
+  CREATE TABLE first_name(
+    fname_id int primary key auto_increment not null,
+    f_name varchar(60) unique
+  );
+
+  CREATE TABLE last_name(
+    lname_id int primary key auto_increment not null,
+    l_name varchar(70) unique
+  );
+
+  CREATE TABLE role_id(
+    r_id int primary key auto_increment not null,
+    job_desc text,
+    titl_id int,
+    sala_id int,
+    depid_int int,
+    contra bool default false,
+    CONSTRAINT FK_TITL
+  );
+
+  
