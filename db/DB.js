@@ -52,7 +52,10 @@ class DB {
     return data;
   };
 
-  addRole = async () => {title}
+  addRole = async ({ title, salary, departmentId }) => {
+    console.log(ans, "ans")
+    console.log(ans.title, "ans.title")
+  }
 };
 
 
