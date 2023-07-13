@@ -52,9 +52,7 @@ class DB {
     return data;
   };
 
-  addRole = async () => {title};
-  
-
+  addRole = async () => {title}
 };
 
 
