@@ -56,4 +56,28 @@ class DB {
 };
 
 
+
+// addRole = async ({ title, salary, departmentId }) => {
+//   await this.db.promise().query('INSERT INTO role SET ?', {
+//     title,
+//     salary,
+//     department_id: departmentId
+//   });
+// };
+
+// getRoles = async () => {
+//   const rolesData = await this.db.promise().query('SELECT name, id as "value" FROM role');
+// };
+
+// addEmp = async ({ firstName, lastName, roleId, managerId }) => {
+//   await this.db.promise().query('INSERT INTO employee SET ?', {
+//     first_name: firstName,
+//     last_name: lastName,
+//     role_id: roleId,
+//     manager_id: managerId
+//   });
+// };
+
+
+
 module.exports = new DB(connection);
