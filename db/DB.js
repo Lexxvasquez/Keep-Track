@@ -58,6 +58,9 @@ class DB {
   }
 };
 
+  addEmployee = async ({ first_name, last_name, role_id }) => {
+      };
+
 
 
 // addRole = async ({ title, salary, departmentId }) => {
