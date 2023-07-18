@@ -36,6 +36,6 @@ WHEN I choose to update an employee role<br>
 THEN I am prompted to select an employee to update and their new role and this information is updated in the database
 
 ## Links
-[Video Recording]()
+[Video Recording](https://drive.google.com/file/d/1PI-wzcwJfE4dZUV96a48WKq41a2RFV3m/view)
 
 [Github](https://github.com/Lexxvasquez/Keep-Track)
