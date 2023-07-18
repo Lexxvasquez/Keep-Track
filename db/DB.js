@@ -1,16 +1,24 @@
-const cTable = require('console.table');
-const connection = require('./connection');
+const cTable = require("console.table");
+const connection = require("./connection");
 
 class DB {
   constructor(connection) {
     this.db = connection;
   }
 
-  viewDepts = () => this.db.promise().query('SELECT * FROM department').then(([data]) => {
-    console.table(data)
-  });
+  viewDepts = () =>
+    this.db
+      .promise()
+      .query("SELECT * FROM department")
+      .then(([data]) => {
+        console.table(data);
+      });
 
-  viewRoles = () => this.db.promise().query(`
+  viewRoles = () =>
+    this.db
+      .promise()
+      .query(
+        `
     SELECT
         r.id,
         r.title,
@@ -19,11 +27,17 @@ class DB {
     FROM role r
     JOIN department d 
     ON r.department_id = d.id
-    `).then(([data]) => {
-    console.table(data)
-  });
+    `
+      )
+      .then(([data]) => {
+        console.table(data);
+      });
 
-  viewEmps = () => this.db.promise().query(`
+  viewEmps = () =>
+    this.db
+      .promise()
+      .query(
+        `
       SELECT
         e.id,
         e.first_name,
@@ -39,51 +53,76 @@ class DB {
       ON r.department_id = d.id
       LEFT JOIN employee AS e2
       ON e.manager_id = e2.id
-  `).then(([data]) => {
-    console.table(data)
-  });
+  `
+      )
+      .then(([data]) => {
+        console.table(data);
+      });
 
-  addDept = async ({name}) => {
-    this.db.promise().query(`INSERT INTO department SET ?`, {name});
+  addDept = async ({ name }) => {
+    this.db.promise().query(`INSERT INTO department SET ?`, { name });
   };
 
   getDepts = async () => {
-    let [data] = await this.db.promise().query('SELECT name, id AS "value" FROM department');
+    let [data] = await this.db
+      .promise()
+      .query('SELECT name, id AS "value" FROM department');
     return data;
   };
 
-  addRole = async ({ title, salary, departmentId }) => {
-    console.log(ans, "ans")
-    console.log(ans.title, "ans.title")
-  }
+  getRoles = async () => {
+    let [data] = await this.db
+      .promise()
+      .query('SELECT title AS name, id AS "value" FROM role');
+    return data;
+  };
+
+  getEmps = async () => {
+    let [data] = await this.db
+      .promise()
+      .query(
+        'SELECT CONCAT(first_name," ",last_name) AS name, id AS "value" FROM employee'
+      );
+    data.push({ name: "Null", value: null });
+
+    return data;
+  };
+
+  addRole = async ({ title, salary, department_id }) => {
+    let [data] = await this.db
+      .promise()
+      .query(
+        "INSERT INTO role SET ?",
+        { title, salary, department_id },
+        (err) => {
+          if (err) return console.log(err);
+          return;
+        }
+      );
+  };
+
+  addEmp = async ({ first_name, last_name, role_id, manager_id }) => {
+    await this.db
+      .promise()
+      .query(
+        "INSERT INTO employee SET ?",
+        { first_name, last_name, role_id, manager_id },
+        (err) => {
+          if (err) return err;
+          return;
+        }
+      );
+  };
+
+  updateRole = async ({ role_id, id }) => {
+
+    await this.db
+      .promise()
+      .query("UPDATE employee SET ? WHERE ?", [{role_id}, {id}], (err) => {
+        if (err) return err;
+        return;
+      });
+  };
 };
-
-  addEmployee = async ({ first_name, last_name, role_id }) => {
-      };
-
-
-
-// addRole = async ({ title, salary, departmentId }) => {
-//   await this.db.promise().query('INSERT INTO role SET ?', {
-//     title,
-//     salary,
-//     department_id: departmentId
-//   });
-// };
-
-// getRoles = async () => {
-//   const rolesData = await this.db.promise().query('SELECT name, id as "value" FROM role');
-// };
-
-// addEmp = async ({ firstName, lastName, roleId, managerId }) => {
-//   await this.db.promise().query('INSERT INTO employee SET ?', {
-//     first_name: firstName,
-//     last_name: lastName,
-//     role_id: roleId,
-//     manager_id: managerId
-//   });
-// };
-
-
 
 module.exports = new DB(connection);

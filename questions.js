@@ -39,7 +39,47 @@ const questions = [
     message: 'Which department will be assigned with this role?',
     choices: async() => DB.getDepts(),
     when: ({task}) => task == 'add a role'
-  }
+  },
+  {
+    type: 'input',
+    name: 'first_name',
+    message: "What is the employee's first name?",
+    when: ({task}) => task == 'add an employee'
+  },
+  {
+    type: 'input',
+    name: 'last_name',
+    message: "What is the employee's last name?",
+    when: ({task}) => task == 'add an employee'
+  },
+  {
+    type: 'list',
+    name: 'id',
+    message: "Who is the employee you want to update?",
+    choices: async() => DB.getEmps(),
+    when: ({task}) => task == 'update an employee role'
+  },
+  {
+    type: 'list',
+    name: 'role_id',
+    message: "What is the employee's new role?",
+    choices: async() => DB.getRoles(),
+    when: ({task}) => task == 'add an employee' || task == 'update an employee role'
+  },
+  {
+    type: 'list',
+    name: 'manager_id',
+    message: "Who is the employee's manager?",
+    choices: async() => DB.getEmps(),
+    when: ({task}) => task == 'add an employee'
+  },
 ]
+// {
+//   type: 'list',
+//   name: 'manager_id',
+//   message: "Who is the employee's manager?",
+//   choices: async() => DB.getEmps(),
+//   when: ({task}) => task == ''
+// },
 
 module.exports = questions;
