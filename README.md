@@ -36,8 +36,7 @@ WHEN I choose to update an employee role<br>
 THEN I am prompted to select an employee to update and their new role and this information is updated in the database
 
 ## Usage
-
-![app](Screenshot 2023-08-04 194820.jpg)
+![app](<images/KEEP TRACK-1.png>)
 
 ## Links
 [Video Recording](https://drive.google.com/file/d/1PI-wzcwJfE4dZUV96a48WKq41a2RFV3m/view)
